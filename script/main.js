@@ -14,20 +14,18 @@ function shuffleArray(array) {
     return array;
 }
 
-//function that add buttons in the first paragraph of out html page
-function addButtons() {
+//function that add buttons inside the div that has the id equal to first
+function addButtonsToFirstDiv() {
     const input = document.querySelector('input');
-    const paraFirst = document.getElementById('first');
+    const divFirst = document.getElementById('first');
     let nrOfButtons = Number(input.value);
     winningNumber = Math.floor(Math.random() * Number(input.value));
 
-    //create array
     let numbersArray = [];
     for (let i = 0; i < nrOfButtons; ++i) {
         numbersArray[i] = i;
     }
-    
-    //shuffle the array
+
     numbersArray = shuffleArray(numbersArray);
     
     //create buttons and set an id
@@ -35,21 +33,17 @@ function addButtons() {
         const newButton = document.createElement('button');
         newButton.innerText = "Cick me"; 
         newButton.id = numbersArray[i];
-        paraFirst.appendChild(newButton);
+        divFirst.appendChild(newButton);
     }
 }
 
-//function that clears all the buttons created
+//function that removes all the buttons created
 function clearButtons() {
-    let oldButtons = document.getElementById('first').querySelectorAll('button');
-    const paraFirst = document.getElementById('first');
-    for (let i = 0; i < oldButtons.length; ++i) {
-        const oldButton = paraFirst.querySelector('button');
-        paraFirst.removeChild(oldButton);
-    }
+    const divFirst = document.getElementById('first');
+    divFirst.innerHTML = "";
 }
 
-/*we are setting an event listner on the event object*/
+//we are setting an event listener on the event object
 function addListenerCheckValue() {
     const paraFirst = document.getElementById('first');
     paraFirst.addEventListener("click", function(e) {
@@ -65,7 +59,7 @@ function addListenerCheckValue() {
 function init() {
     const removeButton = document.createElement('button');
     removeButton.innerText = "Clear buttons";
-    document.getElementById('addButton').addEventListener('click', addButtons);
+    document.getElementById('addButton').addEventListener('click', addButtonsToFirstDiv);
     document.getElementById('second').appendChild(removeButton);
     removeButton.addEventListener('click', clearButtons);
     addListenerCheckValue();
